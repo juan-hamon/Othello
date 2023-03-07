@@ -1,3 +1,9 @@
 {
-    "mainTitle": "Bienvenido al juego Othello"
+    "mainTitle": "Bienvenido al juego Othello",
+    "statGameText": "Empezar el juego",
+    "playerCardTitle": "Jugador {numPlayer}",
+    "playerSelectColor": "Selecciona tu color",
+    "playerNameHint": "Nombre del jugador",
+    "enableDiagonalsOption": "Habilitar diagonales",
+    "changeBoardSizeOption": "Cambiar tamaño del tablero"
 }

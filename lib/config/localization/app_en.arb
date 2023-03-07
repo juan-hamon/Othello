@@ -1,3 +1,36 @@
 {
-    "mainTitle": "Welcome to the Othello Game!"
+    "mainTitle": "Welcome to the Othello Game!",
+    "@mainTitle": {
+        "description": "Title of the home page"
+    },
+    "statGameText": "Start Game",
+    "@statGameText": {
+        "description": "Text for the start game button"
+    },
+    "playerCardTitle": "Player {numPlayer}",
+    "@playerCardTitle": {
+        "description": "The title string for the player card, indicating the player number",
+        "placeholders": {
+            "numPlayer": {
+                "type": "int",
+                "example": "1"
+            }
+         }
+    },
+    "playerSelectColor": "Select your color",
+    "@playerSelectColor": {
+        "description": "Title for player card, telling the player to choose a color."
+    },
+    "playerNameHint": "Player name",
+    "@playerNameHint":{
+        "description": "The hint text for the player's name TextField"
+    },
+    "enableDiagonalsOption": "Enable Diagonals",
+    "@enableDiagonalsOption": {
+        "description": "Text for the checkbox that allows diagonal movements"
+    },
+    "changeBoardSizeOption": "Change Board Size",
+    "@changeBoardSizeOption": {
+        "description": "Text for the checkbox that allows to change the board size"
+    }
 }
