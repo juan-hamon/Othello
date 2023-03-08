@@ -32,5 +32,37 @@
     "changeBoardSizeOption": "Change Board Size",
     "@changeBoardSizeOption": {
         "description": "Text for the checkbox that allows to change the board size"
+    },
+    "settingsTitle": "Settings",
+    "@settingsTitle": {
+        "description": "Main title in the app settings dialog"
+    },
+    "appearanceTitle": "Appearance",
+    "@appearanceTitle": {
+        "description": "Appearance subtitle in the app settings dialog"
+    },
+    "lightThemOption": "Light Theme",
+    "@lightThemOption": {
+        "description": "Light theme option text in the app settings dialog"
+    },
+    "darkThemeOption": "Dark Theme",
+    "@darkThemeOption": {
+        "description": "Dark theme option text in the app settings dialog"
+    },
+    "languageTitle": "Language",
+    "@languageTitle": {
+        "description": "Language subtitle in the app settings dialog"
+    },
+    "englishOption": "English",
+    "@englishOption": {
+        "description": "English language option text in the app settings dialog"
+    },
+    "spanishOption": "Spanish",
+    "@spanishOption": {
+        "description": "Spanish language option text in the app settings dialog"
+    },
+    "doneButtonText": "Done",
+    "@doneButtonText": {
+        "description": "Text used for done button in dialogs"
     }
 }

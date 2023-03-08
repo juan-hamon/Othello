@@ -5,5 +5,13 @@
     "playerSelectColor": "Selecciona tu color",
     "playerNameHint": "Nombre del jugador",
     "enableDiagonalsOption": "Habilitar diagonales",
-    "changeBoardSizeOption": "Cambiar tamaño del tablero"
+    "changeBoardSizeOption": "Cambiar tamaño del tablero",
+    "settingsTitle": "Configuración",
+    "appearanceTitle": "Apariencia",
+    "lightThemOption": "Tema claro",
+    "darkThemeOption": "Tema oscuro",
+    "languageTitle": "Idioma",
+    "englishOption": "Inglés",
+    "spanishOption": "Español",
+    "doneButtonText": "Listo"
 }

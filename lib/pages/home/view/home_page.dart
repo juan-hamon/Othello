@@ -34,7 +34,10 @@ class HomePage extends ConsumerWidget {
                         .copyWith(color: Colors.white),
                   ),
                   IconButton(
-                    onPressed: () => {},
+                    onPressed: () => showDialog(
+                      context: context,
+                      builder: (_) => const SettingsDialog(),
+                    ),
                     icon: const Icon(Icons.settings),
                     color: Colors.white,
                   )
