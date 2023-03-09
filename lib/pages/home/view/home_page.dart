@@ -2,14 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:othello/pages/home/widgets/widgets.dart';
+import 'package:othello/providers/providers.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
+  /// Validates that the names of each player are valid, that each one has selected
+  /// a different color and name and that the board dimensions are valid.
+  void validateInput(
+    GlobalKey<FormState> playerOneKey,
+    GlobalKey<FormState> playerTwoKey,
+    GlobalKey<FormState> boardSizeInputKey,
+    WidgetRef ref,
+  ) {
+    // TODO: Validate that the players selected different colors and have different names.
+    final bool isPlayerOneValid = playerOneKey.currentState!.validate();
+    final bool isPlayerTwoValid = playerTwoKey.currentState!.validate();
+    final bool changeSizeSelected = ref.read(dynamicBoardSizeProvider);
+    final bool areDimensionValid = (changeSizeSelected)
+        ? boardSizeInputKey.currentState!.validate()
+        : true;
+    if (isPlayerOneValid && isPlayerTwoValid && areDimensionValid) {
+      playerOneKey.currentState!.save();
+      playerTwoKey.currentState!.save();
+      boardSizeInputKey.currentState!.save();
+      // TODO: Go to game page.
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final GlobalKey<FormState> formKeyPlayerOne = GlobalKey<FormState>();
-    final GlobalKey<FormState> formKeyPlayerTwo = GlobalKey<FormState>();
+    final GlobalKey<FormState> playerOneKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> playerTwoKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> boardSizeInputKey = GlobalKey<FormState>();
     return Scaffold(
       body: Container(
         color: Theme.of(context).primaryColor,
@@ -52,11 +77,11 @@ class HomePage extends ConsumerWidget {
               children: [
                 PlayerCard(
                   playerId: 1,
-                  formKey: formKeyPlayerOne,
+                  formKey: playerOneKey,
                 ),
                 PlayerCard(
                   playerId: 2,
-                  formKey: formKeyPlayerTwo,
+                  formKey: playerTwoKey,
                 ),
               ],
             ),
@@ -70,48 +95,17 @@ class HomePage extends ConsumerWidget {
               ),
               child: Card(
                 elevation: 10.0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: false,
-                          // TODO: Allow to enable diagonal movements.
-                          onChanged: (_) {},
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.enableDiagonalsOption,
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: false,
-                          // TODO: Allow to change the board size.
-                          onChanged: (_) {},
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.changeBoardSizeOption,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
+                child: GameOptionCard(formKey: boardSizeInputKey),
               ),
             ),
             const Spacer(),
             ElevatedButton.icon(
-              onPressed: () {
-                bool isPlayerOneValid =
-                    formKeyPlayerOne.currentState!.validate();
-                bool isPlayerTwoValid =
-                    formKeyPlayerTwo.currentState!.validate();
-                if (isPlayerOneValid && isPlayerTwoValid) {
-                  // TODO: Go to game page.
-                }
-              },
+              onPressed: () => validateInput(
+                playerOneKey,
+                playerTwoKey,
+                boardSizeInputKey,
+                ref,
+              ),
               icon: const Icon(Icons.check),
               label: Text(AppLocalizations.of(context)!.statGameText),
             ),
