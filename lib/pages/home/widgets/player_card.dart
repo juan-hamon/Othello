@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:othello/logic/player/player.dart';
 import 'package:othello/pages/home/widgets/widgets.dart';
+import 'package:othello/providers/player/player.dart';
 
 class PlayerCard extends ConsumerWidget {
   const PlayerCard({required this.playerId, required this.formKey, super.key});
@@ -54,9 +55,12 @@ class PlayerCard extends ConsumerWidget {
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.playerNameHint,
                 ),
+                onSaved: (String? newValue) {
+                  ref.read(namesProviders[playerId]!.notifier).state =
+                      newValue!;
+                },
                 maxLength: 20,
-                validator: (String? value) =>
-                    PlayerValidator.isValidName(name: value),
+                validator: PlayerValidator.isValidName,
               ),
             ],
           ),

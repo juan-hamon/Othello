@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:othello/logic/player/player.dart';
 import 'package:othello/pages/home/widgets/widgets.dart';
 import 'package:othello/providers/providers.dart';
 
@@ -14,18 +15,48 @@ class HomePage extends ConsumerWidget {
     GlobalKey<FormState> playerTwoKey,
     GlobalKey<FormState> boardSizeInputKey,
     WidgetRef ref,
+    BuildContext context,
   ) {
-    // TODO: Validate that the players selected different colors and have different names.
     final bool isPlayerOneValid = playerOneKey.currentState!.validate();
     final bool isPlayerTwoValid = playerTwoKey.currentState!.validate();
     final bool changeSizeSelected = ref.read(dynamicBoardSizeProvider);
     final bool areDimensionValid = (changeSizeSelected)
         ? boardSizeInputKey.currentState!.validate()
         : true;
+
     if (isPlayerOneValid && isPlayerTwoValid && areDimensionValid) {
       playerOneKey.currentState!.save();
       playerTwoKey.currentState!.save();
-      boardSizeInputKey.currentState!.save();
+
+      final bool areNamesEqual = PlayerValidator.areNamesEqual(
+        name1: ref.read(namesProviders[1]!),
+        name2: ref.read(namesProviders[2]!),
+      );
+      final bool areColorsEqual = PlayerValidator.areColorsEqual(
+        color1: ref.read(selectedColorProviders[1]!),
+        color2: ref.read(selectedColorProviders[2]!),
+      );
+
+      if (areNamesEqual) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => ErrorDialog(
+            errorMessage: AppLocalizations.of(context)!.sameNameErrorText,
+          ),
+        );
+        return;
+      }
+
+      if (areColorsEqual) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => ErrorDialog(
+            errorMessage: AppLocalizations.of(context)!.sameColorErrorText,
+          ),
+        );
+        return;
+      }
+
       // TODO: Go to game page.
     }
   }
@@ -105,6 +136,7 @@ class HomePage extends ConsumerWidget {
                 playerTwoKey,
                 boardSizeInputKey,
                 ref,
+                context,
               ),
               icon: const Icon(Icons.check),
               label: Text(AppLocalizations.of(context)!.statGameText),

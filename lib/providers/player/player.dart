@@ -16,3 +16,10 @@ final Map<int, StateProvider<Color>> selectedColorProviders = {
   1: StateProvider<Color>((ref) => Colors.transparent),
   2: StateProvider<Color>((ref) => Colors.transparent)
 };
+
+/// This is a [Map] of [StateProvider<String>] and it's used to
+/// store each player names.
+final Map<int, StateProvider<String>> namesProviders = {
+  1: StateProvider<String>((ref) => ""),
+  2: StateProvider<String>((ref) => "")
+};

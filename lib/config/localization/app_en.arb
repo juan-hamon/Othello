@@ -64,5 +64,21 @@
     "doneButtonText": "Done",
     "@doneButtonText": {
         "description": "Text used for done button in dialogs"
+    },
+    "warningTitle": "Warning",
+    "@warningTitle": {
+        "description": "Main title in the home screen error dialog"
+    },
+    "sameNameErrorText": "Player names cannot be the same.",
+    "@sameNameErrorText": {
+        "description": "Text used to indicate that the names of the two players cannot be the same"
+    },
+    "sameColorErrorText": "Player colors cannot be the same.",
+    "@sameColorErrorText": {
+        "description": "Text used to indicate that the colors of the two players cannot be the same"
+    },
+    "okButtonText": "Ok",
+    "@okButtonText": {
+        "description": "Text used for ok button in dialogs"
     }
 }

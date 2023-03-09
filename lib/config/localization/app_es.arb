@@ -13,5 +13,9 @@
     "languageTitle": "Idioma",
     "englishOption": "Inglés",
     "spanishOption": "Español",
-    "doneButtonText": "Listo"
+    "doneButtonText": "Listo",
+    "warningTitle": "Alerta",
+    "sameNameErrorText": "Los nombres de los jugadores no pueden ser iguales.",
+    "sameColorErrorText": "Los colores de los jugadores no pueden ser iguales.",
+    "okButtonText": "Entendido"
 }
