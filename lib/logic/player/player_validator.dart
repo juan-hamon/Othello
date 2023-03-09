@@ -16,4 +16,8 @@ class PlayerValidator {
   static bool areColorsEqual({required Color color1, required Color color2}) {
     return color1 == color2;
   }
+
+  static bool didChooseColors({required Color color1, required Color color2}) {
+    return color1 != Colors.transparent && color2 != Colors.transparent;
+  }
 }

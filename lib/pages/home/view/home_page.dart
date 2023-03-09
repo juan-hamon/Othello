@@ -32,6 +32,12 @@ class HomePage extends ConsumerWidget {
         name1: ref.read(namesProviders[1]!),
         name2: ref.read(namesProviders[2]!),
       );
+
+      final bool didChoseColors = PlayerValidator.didChooseColors(
+        color1: ref.read(selectedColorProviders[1]!),
+        color2: ref.read(selectedColorProviders[2]!),
+      );
+
       final bool areColorsEqual = PlayerValidator.areColorsEqual(
         color1: ref.read(selectedColorProviders[1]!),
         color2: ref.read(selectedColorProviders[2]!),
@@ -42,6 +48,16 @@ class HomePage extends ConsumerWidget {
           context: context,
           builder: (BuildContext context) => ErrorDialog(
             errorMessage: AppLocalizations.of(context)!.sameNameErrorText,
+          ),
+        );
+        return;
+      }
+
+      if (!didChoseColors) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => ErrorDialog(
+            errorMessage: AppLocalizations.of(context)!.noColorChosenText,
           ),
         );
         return;

@@ -77,6 +77,10 @@
     "@sameColorErrorText": {
         "description": "Text used to indicate that the colors of the two players cannot be the same"
     },
+    "noColorChosenText": "At least one player didn't chose a color, both players must chose a color.",
+    "@sameColorErrorText": {
+        "description": "Text used to indicate that at least one player didn't chose a color"
+    },
     "okButtonText": "Ok",
     "@okButtonText": {
         "description": "Text used for ok button in dialogs"
