@@ -10,6 +10,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final LanguageChangeNotifier language = ref.watch(languageProvider);
+    final Brightness brightness = ref.watch(themeProvider);
     return MaterialApp.router(
       title: 'Othello Game',
       debugShowCheckedModeBanner: false,
@@ -19,7 +20,7 @@ class MyApp extends ConsumerWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.green,
-          brightness: Brightness.light,
+          brightness: brightness,
         ),
         fontFamily: 'Source Sans Pro',
         useMaterial3: true,

@@ -1,3 +1,22 @@
 {
-    "mainTitle": "Bienvenido al juego Othello"
+    "mainTitle": "Bienvenido al juego Othello",
+    "statGameText": "Empezar el juego",
+    "playerCardTitle": "Jugador {numPlayer}",
+    "playerSelectColor": "Selecciona tu color",
+    "playerNameHint": "Nombre del jugador",
+    "enableDiagonalsOption": "Habilitar diagonales",
+    "changeBoardSizeOption": "Cambiar tamaño del tablero",
+    "settingsTitle": "Configuración",
+    "appearanceTitle": "Apariencia",
+    "lightThemOption": "Tema claro",
+    "darkThemeOption": "Tema oscuro",
+    "languageTitle": "Idioma",
+    "englishOption": "Inglés",
+    "spanishOption": "Español",
+    "doneButtonText": "Listo",
+    "warningTitle": "Alerta",
+    "sameNameErrorText": "Los nombres de los jugadores no pueden ser iguales.",
+    "sameColorErrorText": "Los colores de los jugadores no pueden ser iguales.",
+    "noColorChosenText": "Al menos un jugador no eligió un color, ambos jugadores deben elegir un color.",
+    "okButtonText": "Entendido"
 }

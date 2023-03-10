@@ -1,3 +1,88 @@
 {
-    "mainTitle": "Welcome to the Othello Game!"
+    "mainTitle": "Welcome to the Othello Game!",
+    "@mainTitle": {
+        "description": "Title of the home page"
+    },
+    "statGameText": "Start Game",
+    "@statGameText": {
+        "description": "Text for the start game button"
+    },
+    "playerCardTitle": "Player {numPlayer}",
+    "@playerCardTitle": {
+        "description": "The title string for the player card, indicating the player number",
+        "placeholders": {
+            "numPlayer": {
+                "type": "int",
+                "example": "1"
+            }
+         }
+    },
+    "playerSelectColor": "Select your color",
+    "@playerSelectColor": {
+        "description": "Title for player card, telling the player to choose a color."
+    },
+    "playerNameHint": "Player name",
+    "@playerNameHint":{
+        "description": "The hint text for the player's name TextField"
+    },
+    "enableDiagonalsOption": "Enable Diagonals",
+    "@enableDiagonalsOption": {
+        "description": "Text for the checkbox that allows diagonal movements"
+    },
+    "changeBoardSizeOption": "Change Board Size",
+    "@changeBoardSizeOption": {
+        "description": "Text for the checkbox that allows to change the board size"
+    },
+    "settingsTitle": "Settings",
+    "@settingsTitle": {
+        "description": "Main title in the app settings dialog"
+    },
+    "appearanceTitle": "Appearance",
+    "@appearanceTitle": {
+        "description": "Appearance subtitle in the app settings dialog"
+    },
+    "lightThemOption": "Light Theme",
+    "@lightThemOption": {
+        "description": "Light theme option text in the app settings dialog"
+    },
+    "darkThemeOption": "Dark Theme",
+    "@darkThemeOption": {
+        "description": "Dark theme option text in the app settings dialog"
+    },
+    "languageTitle": "Language",
+    "@languageTitle": {
+        "description": "Language subtitle in the app settings dialog"
+    },
+    "englishOption": "English",
+    "@englishOption": {
+        "description": "English language option text in the app settings dialog"
+    },
+    "spanishOption": "Spanish",
+    "@spanishOption": {
+        "description": "Spanish language option text in the app settings dialog"
+    },
+    "doneButtonText": "Done",
+    "@doneButtonText": {
+        "description": "Text used for done button in dialogs"
+    },
+    "warningTitle": "Warning",
+    "@warningTitle": {
+        "description": "Main title in the home screen error dialog"
+    },
+    "sameNameErrorText": "Player names cannot be the same.",
+    "@sameNameErrorText": {
+        "description": "Text used to indicate that the names of the two players cannot be the same"
+    },
+    "sameColorErrorText": "Player colors cannot be the same.",
+    "@sameColorErrorText": {
+        "description": "Text used to indicate that the colors of the two players cannot be the same"
+    },
+    "noColorChosenText": "At least one player didn't chose a color, both players must chose a color.",
+    "@sameColorErrorText": {
+        "description": "Text used to indicate that at least one player didn't chose a color"
+    },
+    "okButtonText": "Ok",
+    "@okButtonText": {
+        "description": "Text used for ok button in dialogs"
+    }
 }
