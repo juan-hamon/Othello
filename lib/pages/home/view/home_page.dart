@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:othello/logic/player/player.dart';
 import 'package:othello/pages/home/widgets/widgets.dart';
 import 'package:othello/providers/providers.dart';
@@ -73,7 +74,7 @@ class HomePage extends ConsumerWidget {
         return;
       }
 
-      // TODO: Go to game page.
+      GoRouter.of(context).go('/game');
     }
   }
 
