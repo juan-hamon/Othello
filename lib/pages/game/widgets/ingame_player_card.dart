@@ -4,11 +4,13 @@ class InGamePlayerCard extends StatelessWidget {
   const InGamePlayerCard({
     required this.playerName,
     required this.playerColor,
+    required this.playerPieces,
     super.key,
   });
 
   final String playerName;
   final Color playerColor;
+  final int playerPieces;
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +51,10 @@ class InGamePlayerCard extends StatelessWidget {
                 // TODO: Disable the button when it's not the player turn (assign this to null).
                 onPressed: () {},
               ),
-              // TODO: Change this text with the amount of pieces of the player.
-              title: Text("x32", style: Theme.of(context).textTheme.titleLarge),
+              title: Text(
+                "x$playerPieces",
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
             )
           ],
         ),
