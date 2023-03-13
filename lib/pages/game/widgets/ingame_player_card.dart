@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:othello/logic/player/player.dart';
+import 'package:othello/providers/providers.dart';
 
-class InGamePlayerCard extends StatelessWidget {
+class InGamePlayerCard extends ConsumerWidget {
   const InGamePlayerCard({
-    required this.playerName,
-    required this.playerColor,
-    required this.playerPieces,
+    required this.player,
     super.key,
   });
 
-  final String playerName;
-  final Color playerColor;
-  final int playerPieces;
+  final Player player;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    Player currentPlayer = ref.watch(boardServiceProvider).currentPlayer;
     return Card(
       elevation: 10.0,
       shadowColor: Theme.of(context).shadowColor,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          // TODO: Highlight the current player
-          border: Border.all(color: Colors.transparent, width: 2.0),
+          border: Border.all(
+            color: player == currentPlayer ? player.color : Colors.transparent,
+            width: 2.0,
+          ),
         ),
         constraints: const BoxConstraints(
           maxWidth: 250,
@@ -32,7 +34,7 @@ class InGamePlayerCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              playerName,
+              player.name,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             ListTile(
@@ -40,7 +42,7 @@ class InGamePlayerCard extends StatelessWidget {
                 width: 40,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: playerColor,
+                  color: player.color,
                 ),
               ),
               trailing: IconButton(
@@ -48,11 +50,10 @@ class InGamePlayerCard extends StatelessWidget {
                   Icons.flag,
                 ),
                 color: Colors.red,
-                // TODO: Disable the button when it's not the player turn (assign this to null).
-                onPressed: () {},
+                onPressed: player == currentPlayer ? () {} : null,
               ),
               title: Text(
-                "x$playerPieces",
+                "x${player.getPlayablePieces(ref.watch(maxPiecesProvider))}",
                 style: Theme.of(context).textTheme.titleLarge,
               ),
             )

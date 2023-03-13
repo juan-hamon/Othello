@@ -5,13 +5,12 @@ class Player {
   int id;
   String name;
   Color color;
-  List<Piece> placedPieces;
+  List<Piece> placedPieces = [];
 
   Player({
     required this.id,
     required this.name,
     required this.color,
-    this.placedPieces = const [],
   });
 
   int getPlayablePieces(int maxPieces) {

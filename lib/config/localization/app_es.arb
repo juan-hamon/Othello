@@ -18,5 +18,6 @@
     "sameNameErrorText": "Los nombres de los jugadores no pueden ser iguales.",
     "sameColorErrorText": "Los colores de los jugadores no pueden ser iguales.",
     "noColorChosenText": "Al menos un jugador no eligió un color, ambos jugadores deben elegir un color.",
-    "okButtonText": "Entendido"
+    "okButtonText": "Entendido",
+    "invalidMovementText": "Ese es un movimiento inválido"
 }

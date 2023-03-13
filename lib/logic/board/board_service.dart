@@ -18,11 +18,10 @@ abstract class BoardService {
   void changeCurrentPlayer(Player nextPlayer);
   void changeTurn(Color nextPlayerColor);
   void checkForGameOver();
+  bool checkForPath(Piece initialPiece, Direction direction);
   void convertPieces(List<Piece> piecesToConvert, Color color);
   bool hasPossibleMovements();
   List<Piece> obtainAdjacentPieces(Piece piece);
   Direction obtainDirection(Piece begin, Piece end);
   List<Piece> obtainPiecesToConvert(Piece initialPiece, Direction direction);
-  void restartGame();
-  void startGame();
 }

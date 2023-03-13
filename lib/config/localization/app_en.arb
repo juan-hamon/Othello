@@ -84,5 +84,9 @@
     "okButtonText": "Ok",
     "@okButtonText": {
         "description": "Text used for ok button in dialogs"
+    },
+    "invalidMovementText": "That movement is not valid",
+    "@invalidMovementText": {
+        "description": "Text used to indicate that a movement is not valid for the current player"
     }
 }

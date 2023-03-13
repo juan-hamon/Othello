@@ -1,45 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:othello/logic/player/player.dart';
+import 'package:othello/logic/board/board.dart';
 import 'package:othello/pages/game/widgets/widgets.dart';
 import 'package:othello/providers/providers.dart';
 
 class PlayerPanel extends ConsumerWidget {
-  const PlayerPanel({required this.player, super.key});
+  const PlayerPanel({required this.playerColor, super.key});
 
-  final Player player;
+  final Color playerColor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    BoardService boardService = ref.watch(notifierServiceProvider).boardService;
     return Container(
       alignment: Alignment.topLeft,
       child: Column(
         children: [
           InGamePlayerCard(
-            playerName: player.name,
-            playerColor: player.color,
-            playerPieces: player.getPlayablePieces(ref.read(maxPiecesProvider)),
+            player: boardService.players[playerColor]!,
           ),
           const Spacer(),
-          Draggable(
-            data: player.color,
-            feedback: Container(
-              height: 100,
-              width: 100,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: player.color,
-              ),
-            ),
-            child: Container(
-              height: 120,
-              width: 120,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: player.color,
-              ),
-            ),
-          ),
+          (boardService.currentPlayer == boardService.players[playerColor]!)
+              ? Draggable(
+                  data: playerColor,
+                  feedback: Container(
+                    height: 100,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: playerColor,
+                    ),
+                  ),
+                  child: Container(
+                    height: 120,
+                    width: 120,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: playerColor,
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink(),
           const Spacer(flex: 2),
         ],
       ),

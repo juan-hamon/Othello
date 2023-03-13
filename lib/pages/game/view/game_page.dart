@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:othello/logic/board/board.dart';
-import 'package:othello/logic/player/player.dart';
 import 'package:othello/pages/game/widgets/widgets.dart';
 import 'package:othello/providers/providers.dart';
 import 'package:othello/utils/utils.dart';
@@ -9,10 +8,10 @@ import 'package:othello/utils/utils.dart';
 class GamePage extends ConsumerWidget {
   const GamePage({super.key});
 
-  // TODO: Add the pieces placed on the board to each player.
-  List<BoardSquare> generateSquares(Board board) {
+  List<BoardSquare> generateSquares(BoardService boardService) {
     List<BoardSquare> boardSquares = [];
     Matrix<Square> squares = [];
+    Board board = boardService.board;
     for (int i = 0; i < board.rows; i++) {
       List<Square> row = [];
       for (int j = 0; j < board.columns; j++) {
@@ -26,6 +25,7 @@ class GamePage extends ConsumerWidget {
             position: Pair<int, int>(i, j),
           );
           square.setPiece(toAdd);
+          boardService.players[Colors.white]!.addPiece(toAdd);
         }
 
         // Set the black pieces
@@ -36,9 +36,10 @@ class GamePage extends ConsumerWidget {
             position: Pair<int, int>(i, j),
           );
           square.setPiece(toAdd);
+          boardService.players[Colors.black]!.addPiece(toAdd);
         }
         row.add(square);
-        boardSquares.add(BoardSquare(square: square, row: i, column: j));
+        boardSquares.add(BoardSquare(row: i, column: j));
       }
       squares.add(row);
     }
@@ -49,7 +50,7 @@ class GamePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     int boardDimension = ref.watch(boardDimensionProvider);
-    Board currentBoard = ref.watch(boardProvider);
+    BoardService boardService = ref.watch(boardServiceProvider);
     return Scaffold(
       body: Container(
         color: Theme.of(context).primaryColor,
@@ -58,15 +59,7 @@ class GamePage extends ConsumerWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(5.0),
-              child: PlayerPanel(
-                // TODO: Change the player crated here with the player information
-                // of the BoardService.
-                player: Player(
-                  id: 1,
-                  name: ref.read(namesProviders[1]!),
-                  color: ref.read(selectedColorProviders[1]!),
-                ),
-              ),
+              child: const PlayerPanel(playerColor: Colors.black),
             ),
             Flexible(
               flex: 3,
@@ -88,7 +81,7 @@ class GamePage extends ConsumerWidget {
                       mainAxisSpacing: 1.5,
                       crossAxisSpacing: 1.5,
                       crossAxisCount: boardDimension,
-                      children: generateSquares(currentBoard),
+                      children: generateSquares(boardService),
                     ),
                   ),
                 ),
@@ -96,15 +89,7 @@ class GamePage extends ConsumerWidget {
             ),
             Container(
               padding: const EdgeInsets.all(5.0),
-              child: PlayerPanel(
-                // TODO: Change the player crated here with the player information
-                // of the BoardService.
-                player: Player(
-                  id: 2,
-                  name: ref.read(namesProviders[2]!),
-                  color: ref.read(selectedColorProviders[2]!),
-                ),
-              ),
+              child: const PlayerPanel(playerColor: Colors.white),
             ),
           ],
         ),

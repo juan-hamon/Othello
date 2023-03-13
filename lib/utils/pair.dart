@@ -1,13 +1,13 @@
 class Pair<T, Q> {
-  final T first;
-  final Q second;
-  Pair(this.first, this.second);
+  final T row;
+  final Q column;
+  Pair(this.row, this.column);
 
   @override
   bool operator ==(Object other) {
-    return other is Pair && first == other.first && second == other.second;
+    return other is Pair && row == other.row && column == other.column;
   }
 
   @override
-  int get hashCode => this.first.hashCode + this.second.hashCode;
+  int get hashCode => this.row.hashCode + this.column.hashCode;
 }
