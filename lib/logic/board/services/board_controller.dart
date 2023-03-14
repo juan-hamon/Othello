@@ -112,16 +112,16 @@ class BoardController extends BoardService {
 
   @override
   bool checkForPath(Piece initialPiece, Direction direction) {
-    late int limit, currentRow, currentColumn;
+    late int limit, horizontalLimit, currentRow, currentColumn;
     final bool Function() condition;
-    final int Function() advance;
+    final void Function() advance;
 
     switch (direction) {
       case Direction.up:
         limit = 0;
         currentRow = initialPiece.position.row - 1;
         currentColumn = initialPiece.position.column;
-        condition = () => currentRow > limit;
+        condition = () => currentRow >= limit;
         advance = () => currentRow--;
         break;
       case Direction.down:
@@ -135,7 +135,7 @@ class BoardController extends BoardService {
         limit = 0;
         currentRow = initialPiece.position.row;
         currentColumn = initialPiece.position.column - 1;
-        condition = () => currentColumn > limit;
+        condition = () => currentColumn >= limit;
         advance = () => currentColumn--;
         break;
       case Direction.right:
@@ -146,24 +146,50 @@ class BoardController extends BoardService {
         advance = () => currentColumn++;
         break;
       case Direction.upLeft:
-        // TODO: Handle this case.
-        condition = () => false;
-        advance = () => 0;
+        limit = 0;
+        currentRow = initialPiece.position.row - 1;
+        currentColumn = initialPiece.position.column - 1;
+        condition = () => currentRow >= limit && currentColumn >= limit;
+        advance = () {
+          currentRow--;
+          currentColumn--;
+        };
         break;
       case Direction.downLeft:
-        // TODO: Handle this case.
-        condition = () => false;
-        advance = () => 0;
+        limit = board.rows;
+        horizontalLimit = 0;
+        currentRow = initialPiece.position.row + 1;
+        currentColumn = initialPiece.position.column - 1;
+        condition =
+            () => currentRow < limit && currentColumn >= horizontalLimit;
+        advance = () {
+          currentRow++;
+          currentColumn--;
+        };
         break;
       case Direction.upRight:
-        // TODO: Handle this case.
-        condition = () => false;
-        advance = () => 0;
+        limit = 0;
+        horizontalLimit = board.columns;
+        currentRow = initialPiece.position.row - 1;
+        currentColumn = initialPiece.position.column + 1;
+        condition =
+            () => currentRow >= limit && currentColumn < horizontalLimit;
+        advance = () {
+          currentRow--;
+          currentColumn++;
+        };
         break;
       case Direction.downRight:
-        // TODO: Handle this case.
-        condition = () => false;
-        advance = () => 0;
+        // As the columns and rows are equal, we can use either of
+        // the two values;
+        limit = board.columns;
+        currentRow = initialPiece.position.row + 1;
+        currentColumn = initialPiece.position.column + 1;
+        condition = () => currentRow < limit && currentColumn < limit;
+        advance = () {
+          currentRow++;
+          currentColumn++;
+        };
         break;
     }
 
@@ -275,17 +301,64 @@ class BoardController extends BoardService {
           board.squares[piece.position.row + 1][piece.position.column].piece!);
     }
 
-    // TODO: Add the cases for the diagonals option.
+    if (board.allowDiagonals) {
+      // Has a piece in the down-righ diagonal and doesn't get out of the map.
+      if (piece.position.row + 1 < board.rows &&
+          piece.position.column + 1 < board.columns &&
+          board.squares[piece.position.row + 1][piece.position.column + 1]
+              .cotainsPiece()) {
+        pieces.add(board
+            .squares[piece.position.row + 1][piece.position.column + 1].piece!);
+      }
 
+      // Has a piece in the down-left diagonal and doesn't get out of the map.
+      if (piece.position.row + 1 < board.rows &&
+          piece.position.column - 1 > 0 &&
+          board.squares[piece.position.row + 1][piece.position.column - 1]
+              .cotainsPiece()) {
+        pieces.add(board
+            .squares[piece.position.row + 1][piece.position.column - 1].piece!);
+      }
+
+      // Has a piece in the up-right diagonal and doesn't get out of the map.
+      if (piece.position.row - 1 > 0 &&
+          piece.position.column + 1 < board.columns &&
+          board.squares[piece.position.row - 1][piece.position.column + 1]
+              .cotainsPiece()) {
+        pieces.add(board
+            .squares[piece.position.row - 1][piece.position.column + 1].piece!);
+      }
+
+      // Has a piece in the up-left diagonal and doesn't get out of the map.
+      if (piece.position.row - 1 > 0 &&
+          piece.position.column - 1 > 0 &&
+          board.squares[piece.position.row - 1][piece.position.column - 1]
+              .cotainsPiece()) {
+        pieces.add(board
+            .squares[piece.position.row - 1][piece.position.column - 1].piece!);
+      }
+    }
     return pieces;
   }
 
   @override
   Direction obtainDirection(Piece begin, Piece end) {
     int horizontalDirection = begin.position.column - end.position.column;
+    int verticalDirection = begin.position.row - end.position.row;
     if (horizontalDirection == 0) {
-      int verticalDirection = begin.position.row - end.position.row;
       return verticalDirection > 0 ? Direction.up : Direction.down;
+    } else if (board.allowDiagonals &&
+        horizontalDirection != 0 &&
+        verticalDirection != 0) {
+      if (horizontalDirection == -1 && verticalDirection == -1) {
+        return Direction.downRight;
+      } else if (horizontalDirection == -1 && verticalDirection == 1) {
+        return Direction.upRight;
+      } else if (horizontalDirection == 1 && verticalDirection == -1) {
+        return Direction.downLeft;
+      } else {
+        return Direction.upLeft;
+      }
     } else {
       return horizontalDirection < 0 ? Direction.right : Direction.left;
     }
@@ -293,9 +366,9 @@ class BoardController extends BoardService {
 
   @override
   List<Piece> obtainPiecesToConvert(Piece initialPiece, Direction direction) {
-    late int limit, currentRow, currentColumn;
+    late int limit, horizontalLimit, currentRow, currentColumn;
     final bool Function() condition;
-    final int Function() advance;
+    final void Function() advance;
     final List<Piece> result = [];
     bool containsDifferentColor = false;
     late bool isAnOpponentPiece;
@@ -305,7 +378,7 @@ class BoardController extends BoardService {
         limit = 0;
         currentRow = initialPiece.position.row - 1;
         currentColumn = initialPiece.position.column;
-        condition = () => currentRow > limit;
+        condition = () => currentRow >= limit;
         advance = () => currentRow--;
         break;
       case Direction.down:
@@ -319,7 +392,7 @@ class BoardController extends BoardService {
         limit = 0;
         currentRow = initialPiece.position.row;
         currentColumn = initialPiece.position.column - 1;
-        condition = () => currentColumn > limit;
+        condition = () => currentColumn >= limit;
         advance = () => currentColumn--;
         break;
       case Direction.right:
@@ -330,24 +403,50 @@ class BoardController extends BoardService {
         advance = () => currentColumn++;
         break;
       case Direction.upLeft:
-        // TODO: Handle this case.
-        condition = () => false;
-        advance = () => 0;
+        limit = 0;
+        currentRow = initialPiece.position.row - 1;
+        currentColumn = initialPiece.position.column - 1;
+        condition = () => currentRow >= limit && currentColumn >= limit;
+        advance = () {
+          currentRow--;
+          currentColumn--;
+        };
         break;
       case Direction.downLeft:
-        // TODO: Handle this case.
-        condition = () => false;
-        advance = () => 0;
+        limit = board.rows;
+        horizontalLimit = 0;
+        currentRow = initialPiece.position.row + 1;
+        currentColumn = initialPiece.position.column - 1;
+        condition =
+            () => currentRow < limit && currentColumn >= horizontalLimit;
+        advance = () {
+          currentRow++;
+          currentColumn--;
+        };
         break;
       case Direction.upRight:
-        // TODO: Handle this case.
-        condition = () => false;
-        advance = () => 0;
+        limit = 0;
+        horizontalLimit = board.columns;
+        currentRow = initialPiece.position.row - 1;
+        currentColumn = initialPiece.position.column + 1;
+        condition =
+            () => currentRow >= limit && currentColumn < horizontalLimit;
+        advance = () {
+          currentRow--;
+          currentColumn++;
+        };
         break;
       case Direction.downRight:
-        // TODO: Handle this case.
-        condition = () => false;
-        advance = () => 0;
+        // As the columns and rows are equal, we can use either of
+        // the two values;
+        limit = board.columns;
+        currentRow = initialPiece.position.row + 1;
+        currentColumn = initialPiece.position.column + 1;
+        condition = () => currentRow < limit && currentColumn < limit;
+        advance = () {
+          currentRow++;
+          currentColumn++;
+        };
         break;
     }
 
