@@ -51,6 +51,11 @@ class GamePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     int boardDimension = ref.watch(boardDimensionProvider);
     BoardService boardService = ref.watch(boardServiceProvider);
+    Color playerOneColor = (boardService.players[Colors.black]!.id == 1)
+        ? Colors.black
+        : Colors.white;
+    Color playerTwoColor =
+        (playerOneColor == Colors.black) ? Colors.white : Colors.black;
     return Scaffold(
       body: Container(
         color: Theme.of(context).primaryColor,
@@ -59,7 +64,7 @@ class GamePage extends ConsumerWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(5.0),
-              child: const PlayerPanel(playerColor: Colors.black),
+              child: PlayerPanel(playerColor: playerOneColor),
             ),
             Flexible(
               flex: 3,
@@ -89,7 +94,7 @@ class GamePage extends ConsumerWidget {
             ),
             Container(
               padding: const EdgeInsets.all(5.0),
-              child: const PlayerPanel(playerColor: Colors.white),
+              child: PlayerPanel(playerColor: playerTwoColor),
             ),
           ],
         ),
