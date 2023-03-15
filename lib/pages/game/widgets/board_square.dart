@@ -15,6 +15,43 @@ class BoardSquare extends ConsumerWidget {
   final int row;
   final int column;
 
+  void placePiece(Color playerColor, WidgetRef ref, BuildContext context) {
+    BoardServiceNotifier boardServiceNotifier =
+        ref.watch(notifierServiceProvider);
+    Piece newPiece = Piece(
+      color: playerColor,
+      position: Pair<int, int>(row, column),
+    );
+    bool added = boardServiceNotifier.addPiece(newPiece);
+    if (!added) {
+      showDialog(
+        context: context,
+        barrierColor: Colors.transparent,
+        builder: (BuildContext tcontext) {
+          Future.delayed(const Duration(seconds: 1), () {
+            Navigator.of(context).pop();
+          });
+          return const InvalidMovementDialog();
+        },
+      );
+    } else {
+      Color nextPlayerColor =
+          (playerColor == Colors.black) ? Colors.white : Colors.black;
+      boardServiceNotifier.changeTurn(nextPlayerColor);
+      String? gameOverMessage =
+          boardServiceNotifier.boardService.checkForGameOver(context);
+      if (gameOverMessage != null) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return GameOverDialog(message: gameOverMessage);
+          },
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Square square = ref
@@ -23,30 +60,7 @@ class BoardSquare extends ConsumerWidget {
         .board
         .squares[row][column];
     return DragTarget(
-      onAccept: (Color playerColor) {
-        BoardServiceNotifier boardService = ref.watch(notifierServiceProvider);
-        Piece newPiece = Piece(
-          color: playerColor,
-          position: Pair<int, int>(row, column),
-        );
-        bool added = boardService.addPiece(newPiece);
-        if (!added) {
-          showDialog(
-            context: context,
-            barrierColor: Colors.transparent,
-            builder: (BuildContext tcontext) {
-              Future.delayed(const Duration(seconds: 1), () {
-                Navigator.of(context).pop();
-              });
-              return const InvalidMovementDialog();
-            },
-          );
-        } else {
-          Color nextPlayerColor =
-              (playerColor == Colors.black) ? Colors.white : Colors.black;
-          boardService.changeTurn(nextPlayerColor);
-        }
-      },
+      onAccept: (Color playerColor) => placePiece(playerColor, ref, context),
       builder: (
         BuildContext context,
         List<dynamic> accepted,

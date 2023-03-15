@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:othello/logic/board/board.dart';
 import 'package:othello/logic/player/models/player.dart';
 import 'package:othello/utils/direction.dart';
@@ -88,26 +91,39 @@ class BoardController extends BoardService {
   void changeTurn(Color nextPlayerColor) {
     Player nextPlayer = players[nextPlayerColor]!;
     changeCurrentPlayer(nextPlayer);
-    checkForGameOver();
   }
 
   @override
-  void checkForGameOver() {
+  String? checkForGameOver(BuildContext context) {
     bool hasMovements = hasPossibleMovements();
     int maximumPieces = (board.columns * board.rows) ~/ 2;
-    // TODO: Display the messages in the UI, not in the console.
     if (currentPlayer.placedPieces.isEmpty) {
-      // Show text displaying that this player has lost the game.
-      print("${currentPlayer.name} has lost beacuse he has no placed pieces");
+      return AppLocalizations.of(context)!.noMorePiecesText(currentPlayer.name);
+      //return "${currentPlayer.name} has lost the game, there are no pieces of his/her color.";
     } else if (!hasMovements) {
-      // Show text displaying that this player has lost the game.
-      print(
-          "${currentPlayer.name} has lost beacuse he has no more possible movements.");
+      return AppLocalizations.of(context)!
+          .noMoreMovementsText(currentPlayer.name);
+      //return "${currentPlayer.name} has lost the game, there are no more possible movements.";
     } else if (currentPlayer.getPlayablePieces(maximumPieces) <= 0) {
-      print(
-          "${currentPlayer.name} has lost beacuse he can no loger place pieces");
-      // Show text displaying that this player has lost the game.
+      //print("${currentPlayer.name} has no pieces left to place.");
+      int blackPlayerPieces = players[Colors.black]!.placedPieces.length;
+      int whitePlayerPieces = players[Colors.white]!.placedPieces.length;
+      if (blackPlayerPieces == whitePlayerPieces) {
+        return AppLocalizations.of(context)!.drawGameText;
+        //return "Both players have the same amount of pieces, so it's a draw.";
+      } else {
+        int maxPieces = max(blackPlayerPieces, whitePlayerPieces);
+        String winnersName = "";
+        if (maxPieces == blackPlayerPieces) {
+          winnersName = players[Colors.black]!.name;
+        } else {
+          winnersName = players[Colors.white]!.name;
+        }
+        return AppLocalizations.of(context)!.winnerText(winnersName, maxPieces);
+        //return "$winnersName wins with $maxPieces pieces on the board!!!";
+      }
     }
+    return null;
   }
 
   @override

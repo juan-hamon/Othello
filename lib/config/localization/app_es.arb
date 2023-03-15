@@ -19,5 +19,17 @@
     "sameColorErrorText": "Los colores de los jugadores no pueden ser iguales.",
     "noColorChosenText": "Al menos un jugador no eligió un color, ambos jugadores deben elegir un color.",
     "okButtonText": "Entendido",
-    "invalidMovementText": "Ese es un movimiento inválido"
+    "invalidMovementText": "Ese es un movimiento inválido",
+    "noMorePiecesText": "{player} perdió el juego, no quedan fichas de su color.",
+    "noMoreMovementsText": "{player} perdió el juego, no tiene más movimientos posibles.",
+    "drawGameText": "Ambos jugadores tienen la misma cantidad de fichas, por lo que es un empate.",
+    "winnerText": "{player} ganó con {numPieces} piezas en el tablero!!!",
+    "lostKey": "perdió",
+    "winKey": "ganó",
+    "drawKey": "empate",
+    "defeatTitleText": "Derrota",
+    "victoryTitleText": "Victoria",
+    "drawTitleText": "Empate",
+    "hideDialogButtonText": "Esconder alerta",
+    "goToMenuButtonText": "Volver al inicio"
 }

@@ -44,8 +44,15 @@ final boardProvider = Provider<Board>((ref) {
 /// is used to play the game.
 final boardServiceProvider = Provider<BoardService>((ref) {
   Board board = ref.watch(boardProvider);
-  Player currentPlayer = ref.watch(playersProvider)[Colors.black]!;
-  Player secondPlayer = ref.watch(playersProvider)[Colors.white]!;
+  // This prevents the app to fail when the game is over, because we dispose
+  // all the providers and it will try to find the element with key Colors.black,
+  // which does not exist.
+  Player currentPlayer = (ref.watch(playersProvider)[Colors.black] == null)
+      ? Player(id: 1, name: "", color: Colors.black)
+      : ref.watch(playersProvider)[Colors.black]!;
+  Player secondPlayer = (ref.watch(playersProvider)[Colors.white] == null)
+      ? Player(id: 2, name: "", color: Colors.white)
+      : ref.watch(playersProvider)[Colors.white]!;
   BoardService controller = BoardController(
     board: board,
     currentPlayer: currentPlayer,

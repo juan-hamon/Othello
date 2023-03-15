@@ -17,7 +17,7 @@ abstract class BoardService {
   void addPlayer(Player toAdd);
   void changeCurrentPlayer(Player nextPlayer);
   void changeTurn(Color nextPlayerColor);
-  void checkForGameOver();
+  String? checkForGameOver(BuildContext context);
   bool checkForPath(Piece initialPiece, Direction direction);
   void convertPieces(List<Piece> piecesToConvert, Color color);
   bool hasPossibleMovements();
