@@ -27,6 +27,7 @@ class BoardSquare extends ConsumerWidget {
       showDialog(
         context: context,
         barrierColor: Colors.transparent,
+        barrierDismissible: false,
         builder: (BuildContext tcontext) {
           Future.delayed(const Duration(seconds: 1), () {
             Navigator.of(context).pop();
