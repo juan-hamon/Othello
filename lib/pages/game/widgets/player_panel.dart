@@ -12,6 +12,7 @@ class PlayerPanel extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     BoardService boardService = ref.watch(notifierServiceProvider).boardService;
+    Size appSize = MediaQuery.of(context).size;
     return Container(
       alignment: Alignment.topLeft,
       child: Column(
@@ -24,16 +25,16 @@ class PlayerPanel extends ConsumerWidget {
               ? Draggable(
                   data: playerColor,
                   feedback: Container(
-                    height: 100,
-                    width: 100,
+                    height: (appSize.height * 0.45),
+                    width: (appSize.width * 0.45) / boardService.board.columns,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: playerColor,
                     ),
                   ),
                   child: Container(
-                    height: 120,
-                    width: 120,
+                    height: (appSize.height * 0.495),
+                    width: (appSize.width * 0.495) / boardService.board.columns,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: playerColor,
