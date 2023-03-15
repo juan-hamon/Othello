@@ -94,11 +94,7 @@ class HomePage extends ConsumerWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                    onPressed: () => {},
-                    icon: const Icon(Icons.quiz),
-                    color: Colors.white,
-                  ),
+                  const Icon(Icons.quiz, color: Colors.transparent),
                   Text(
                     AppLocalizations.of(context)!.mainTitle,
                     style: Theme.of(context)

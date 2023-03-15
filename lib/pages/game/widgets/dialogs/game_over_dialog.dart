@@ -15,9 +15,9 @@ class GameOverDialog extends ConsumerWidget {
 
   Color obtainTitleColor(BuildContext context) {
     if (message.contains(AppLocalizations.of(context)!.lostKey)) {
-      return Colors.red;
+      return Theme.of(context).colorScheme.error;
     } else if (message.contains(AppLocalizations.of(context)!.winKey)) {
-      return Colors.green;
+      return Theme.of(context).colorScheme.surfaceTint;
     }
     return Colors.amber;
   }

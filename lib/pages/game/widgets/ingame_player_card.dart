@@ -22,8 +22,8 @@ class InGamePlayerCard extends ConsumerWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: player == currentPlayer ? player.color : Colors.transparent,
-            width: 2.0,
+            color: player == currentPlayer ? Colors.amber : Colors.transparent,
+            width: 2.5,
           ),
         ),
         constraints: const BoxConstraints(
