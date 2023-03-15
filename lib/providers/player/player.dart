@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:othello/logic/player/player.dart';
 
 /// This is a [Map] of [StateProvider<int>] and it's used to store,
 /// for each player id, it's selected color, represented as a
@@ -23,3 +24,16 @@ final Map<int, StateProvider<String>> namesProviders = {
   1: StateProvider<String>((ref) => ""),
   2: StateProvider<String>((ref) => "")
 };
+
+/// This provider is used to create the Players instances
+/// that the [BoardService] will use later for the game.
+final playersProvider = Provider<Map<Color, Player>>((ref) {
+  String playerOneName = ref.watch(namesProviders[1]!);
+  Color playerOneColor = ref.watch(selectedColorProviders[1]!);
+  String playerTwoName = ref.watch(namesProviders[2]!);
+  Color playerTwoColor = ref.watch(selectedColorProviders[2]!);
+  return {
+    playerOneColor: Player(id: 1, color: playerOneColor, name: playerOneName),
+    playerTwoColor: Player(id: 2, color: playerTwoColor, name: playerTwoName),
+  };
+});
