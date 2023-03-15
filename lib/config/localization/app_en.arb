@@ -1,3 +1,188 @@
 {
-    "mainTitle": "Welcome to the Othello Game!"
+    "mainTitle": "Welcome to the Othello Game!",
+    "@mainTitle": {
+        "description": "Title of the home page"
+    },
+    "statGameText": "Start Game",
+    "@statGameText": {
+        "description": "Text for the start game button"
+    },
+    "playerCardTitle": "Player {numPlayer}",
+    "@playerCardTitle": {
+        "description": "The title string for the player card, indicating the player number",
+        "placeholders": {
+            "numPlayer": {
+                "type": "int",
+                "example": "1"
+            }
+         }
+    },
+    "playerSelectColor": "Select your color",
+    "@playerSelectColor": {
+        "description": "Title for player card, telling the player to choose a color."
+    },
+    "playerNameHint": "Player name",
+    "@playerNameHint":{
+        "description": "The hint text for the player's name TextField"
+    },
+    "enableDiagonalsOption": "Enable Diagonals",
+    "@enableDiagonalsOption": {
+        "description": "Text for the checkbox that allows diagonal movements"
+    },
+    "changeBoardSizeOption": "Change Board Size",
+    "@changeBoardSizeOption": {
+        "description": "Text for the checkbox that allows to change the board size"
+    },
+    "settingsTitle": "Settings",
+    "@settingsTitle": {
+        "description": "Main title in the app settings dialog"
+    },
+    "appearanceTitle": "Appearance",
+    "@appearanceTitle": {
+        "description": "Appearance subtitle in the app settings dialog"
+    },
+    "lightThemOption": "Light Theme",
+    "@lightThemOption": {
+        "description": "Light theme option text in the app settings dialog"
+    },
+    "darkThemeOption": "Dark Theme",
+    "@darkThemeOption": {
+        "description": "Dark theme option text in the app settings dialog"
+    },
+    "languageTitle": "Language",
+    "@languageTitle": {
+        "description": "Language subtitle in the app settings dialog"
+    },
+    "englishOption": "English",
+    "@englishOption": {
+        "description": "English language option text in the app settings dialog"
+    },
+    "spanishOption": "Spanish",
+    "@spanishOption": {
+        "description": "Spanish language option text in the app settings dialog"
+    },
+    "doneButtonText": "Done",
+    "@doneButtonText": {
+        "description": "Text used for done button in dialogs"
+    },
+    "warningTitle": "Warning",
+    "@warningTitle": {
+        "description": "Main title in the home screen error dialog"
+    },
+    "sameNameErrorText": "Player names cannot be the same.",
+    "@sameNameErrorText": {
+        "description": "Text used to indicate that the names of the two players cannot be the same"
+    },
+    "sameColorErrorText": "Player colors cannot be the same.",
+    "@sameColorErrorText": {
+        "description": "Text used to indicate that the colors of the two players cannot be the same"
+    },
+    "noColorChosenText": "At least one player didn't chose a color, both players must chose a color.",
+    "@sameColorErrorText": {
+        "description": "Text used to indicate that at least one player didn't chose a color"
+    },
+    "okButtonText": "Ok",
+    "@okButtonText": {
+        "description": "Text used for ok button in dialogs"
+    },
+    "invalidMovementText": "That movement is not valid",
+    "@invalidMovementText": {
+        "description": "Text used to indicate that a movement is not valid for the current player"
+    },
+    "noMorePiecesText": "{player} has lost the game, there are no pieces of his/her color.",
+    "@noMorePiecesText": {
+        "description": "Text used when a player loses the game by not having any pieces left on the board.",
+        "placeholders": {
+            "player": {
+                "type": "String",
+                "example": "John"
+            }
+        }
+    },
+    "noMoreMovementsText": "{player} has lost the game, there are no more possible movements.",
+    "@noMoreMovementsText": {
+        "description": "Text used when a player loses the game by not having any movements left.",
+        "placeholders": {
+            "player": {
+                "type": "String",
+                "example": "John"
+            }
+        }
+    },
+    "drawGameText": "Both players have the same amount of pieces, so it's a draw.",
+    "@drawGameText": {
+        "description": "Text used when both players end with the same amount of pieces by the end of the game."
+    },
+    "winnerText": "{player} wins with {numPieces} pieces on the board!!!",
+    "@winnerText": {
+        "description": "Text used when a player wins by having more pieces than the opponent.",
+        "placeholders": {
+            "player": {
+                "type": "String",
+                "example": "John"
+            },
+            "numPieces": {
+                "type": "int",
+                "example": "1"
+            }
+         }
+    },
+    "lostKey": "lost",
+    "@lostKey": {
+        "description": "String used to verify if a player has lost the game."
+    },
+    "winKey": "win",
+    "@winKey":{
+        "description": "String used to verify if a player has won the game."
+    },
+    "drawKey": "draw",
+    "@drawKey":{
+        "description": "String used to verify if there was a draw."
+    },
+    "defeatTitleText": "Defeat",
+    "@defeatTitleText": {
+        "description": "Text used in the game over dialog as a title when a player loses the game."
+    },
+    "victoryTitleText": "Victory",
+    "@victoryTitleText": {
+        "description": "Text used in the game over dialog as a title when a player wins the game."
+    },
+    "drawTitleText": "Draw",
+    "@drawTitleText": {
+        "description": "Text used in the game over dialog as a title when the game ends as a draw."
+    },
+    "hideDialogButtonText": "Hide Dialog",
+    "@hideDialogButtonText": {
+        "description": "Text used for the 'hide dialog' button in the game over dialog"
+    },
+    "goToMenuButtonText": "Go to menu",
+    "@goToMenuButtonText": {
+        "description": "Text used for the return to home page button in the game over dialog."
+    },
+    "giveUpTitleText": "Give up",
+    "@giveUpTitleText": {
+        "description": "Text used in the give up dialog as the main title."
+    },
+    "giveUpConfirmationText": "Are you sure you want to give up?",
+    "@giveUpConfirmationText": {
+        "description": "Text used in the give up dialog, asking the player if he/she wants to give up."
+    },
+    "giveUpText": "{player} has lost, he/she gave up.",
+    "@giveUpText": {
+        "description": "Text used when a player lose the game beacuse he/she gave up.",
+        "placeholders": {
+            "player": {
+                "type": "String",
+                "example": "John"
+            }
+        }
+    },
+    "noButtonText": "No",
+    "@noButtonText": {
+        "description": "Text used for 'No' button option."
+    },
+    "yesButtonText": "Yes",
+    "@yesButtonText": {
+        "description": "Text used for 'Yes' button option."
+    }
 }
