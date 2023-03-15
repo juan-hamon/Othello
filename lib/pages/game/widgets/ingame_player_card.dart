@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:othello/logic/player/player.dart';
+import 'package:othello/pages/game/widgets/widgets.dart';
 import 'package:othello/providers/providers.dart';
 
 class InGamePlayerCard extends ConsumerWidget {
@@ -50,7 +51,16 @@ class InGamePlayerCard extends ConsumerWidget {
                   Icons.flag,
                 ),
                 color: Colors.red,
-                onPressed: player == currentPlayer ? () {} : null,
+                onPressed: player == currentPlayer
+                    ? () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return GiveUpDialog(player: player);
+                          },
+                        );
+                      }
+                    : null,
               ),
               title: Text(
                 "x${player.getPlayablePieces(ref.watch(maxPiecesProvider))}",

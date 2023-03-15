@@ -31,5 +31,10 @@
     "victoryTitleText": "Victoria",
     "drawTitleText": "Empate",
     "hideDialogButtonText": "Esconder alerta",
-    "goToMenuButtonText": "Volver al inicio"
+    "goToMenuButtonText": "Volver al inicio",
+    "giveUpTitleText": "Rendirse",
+    "giveUpConfirmationText": "¿Estás seguro de que deseas rendirte?",
+    "giveUpText": "{player} perdió el juego, se rindió.",
+    "noButtonText": "No",
+    "yesButtonText": "Si"
 }

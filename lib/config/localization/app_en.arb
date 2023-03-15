@@ -158,5 +158,31 @@
     "goToMenuButtonText": "Go to menu",
     "@goToMenuButtonText": {
         "description": "Text used for the return to home page button in the game over dialog."
+    },
+    "giveUpTitleText": "Give up",
+    "@giveUpTitleText": {
+        "description": "Text used in the give up dialog as the main title."
+    },
+    "giveUpConfirmationText": "Are you sure you want to give up?",
+    "@giveUpConfirmationText": {
+        "description": "Text used in the give up dialog, asking the player if he/she wants to give up."
+    },
+    "giveUpText": "{player} has lost, he/she gave up.",
+    "@giveUpText": {
+        "description": "Text used when a player lose the game beacuse he/she gave up.",
+        "placeholders": {
+            "player": {
+                "type": "String",
+                "example": "John"
+            }
+        }
+    },
+    "noButtonText": "No",
+    "@noButtonText": {
+        "description": "Text used for 'No' button option."
+    },
+    "yesButtonText": "Yes",
+    "@yesButtonText": {
+        "description": "Text used for 'Yes' button option."
     }
 }
