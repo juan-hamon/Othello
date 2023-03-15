@@ -74,27 +74,6 @@ class GameOverDialog extends ConsumerWidget {
                         FilledButton(
                           onPressed: isVisible
                               ? () {
-                                  ref.read(visibilityProvider.notifier).state =
-                                      false;
-                                  Future.delayed(
-                                    const Duration(seconds: 5),
-                                    () {
-                                      ref
-                                          .read(visibilityProvider.notifier)
-                                          .state = true;
-                                    },
-                                  );
-                                }
-                              : null,
-                          child: Text(AppLocalizations.of(context)!
-                              .hideDialogButtonText),
-                        ),
-                        const SizedBox(
-                          width: 10.0,
-                        ),
-                        FilledButton(
-                          onPressed: isVisible
-                              ? () {
                                   selectedColorProviders.forEach((key, value) {
                                     ref.invalidate(value);
                                   });
@@ -121,6 +100,27 @@ class GameOverDialog extends ConsumerWidget {
                           child: Text(
                             AppLocalizations.of(context)!.goToMenuButtonText,
                           ),
+                        ),
+                        const SizedBox(
+                          width: 10.0,
+                        ),
+                        FilledButton(
+                          onPressed: isVisible
+                              ? () {
+                                  ref.read(visibilityProvider.notifier).state =
+                                      false;
+                                  Future.delayed(
+                                    const Duration(seconds: 5),
+                                    () {
+                                      ref
+                                          .read(visibilityProvider.notifier)
+                                          .state = true;
+                                    },
+                                  );
+                                }
+                              : null,
+                          child: Text(AppLocalizations.of(context)!
+                              .hideDialogButtonText),
                         ),
                       ],
                     )

@@ -5,6 +5,9 @@ class BoardValidator {
       if (numberValue == null) {
         return 'Must enter a number';
       }
+      if (numberValue == 2) {
+        return 'Cannot be 2';
+      }
       if (numberValue % 2 == 1) {
         return 'Must be even';
       }

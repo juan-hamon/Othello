@@ -48,15 +48,6 @@ class GiveUpDialog extends StatelessWidget {
                       FilledButton(
                         onPressed: () {
                           Navigator.of(context).pop();
-                        },
-                        child: Text(AppLocalizations.of(context)!.noButtonText),
-                      ),
-                      const SizedBox(
-                        width: 10.0,
-                      ),
-                      FilledButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
                           Future.delayed(const Duration(microseconds: 100), () {
                             showDialog(
                               context: context,
@@ -72,6 +63,15 @@ class GiveUpDialog extends StatelessWidget {
                         },
                         child:
                             Text(AppLocalizations.of(context)!.yesButtonText),
+                      ),
+                      const SizedBox(
+                        width: 10.0,
+                      ),
+                      FilledButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(AppLocalizations.of(context)!.noButtonText),
                       ),
                     ],
                   )
